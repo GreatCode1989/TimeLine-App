@@ -6,7 +6,7 @@
         :key="page"
         :href="`#${page}`"
         :class="{ 'pointer-events-none bg-gray-200': page === currentPage }"
-        @click="currentPage = page"
+        @click="emit('navigate', page)"
       >
         <component :is="navItems[page]" class="h-7 w-7" /> {{ page }}
       </NavItem>
@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import NavItem from "./NavItem.vue";
 
 const props = defineProps({
@@ -23,7 +22,11 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  currentPage: {
+    type: Object,
+    required: true,
+  },
 });
 
-const currentPage = ref("timeline");
+const emit = defineEmits(["navigate"]);
 </script>
