@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import { isPageValid } from "../validators";
 import NavItem from "./NavItem.vue";
 
 const props = defineProps({
@@ -23,10 +24,13 @@ const props = defineProps({
     required: true,
   },
   currentPage: {
-    type: Object,
+    type: String,
     required: true,
+    validator: isPageValid,
   },
 });
 
-const emit = defineEmits(["navigate"]);
+const emit = defineEmits({
+  navigate: isPageValid,
+});
 </script>
