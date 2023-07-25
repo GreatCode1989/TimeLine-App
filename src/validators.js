@@ -1,4 +1,4 @@
-import { NAV_ITEMS, HOURS_IN_DAY, MID_NIGHT } from "./constants";
+import { NAV_ITEMS, HOURS_IN_DAY, MID_NIGHT, BUTTON_TYPES } from "./constants";
 
 export function isPageValid(page) {
   return Object.keys(NAV_ITEMS).includes(page);
@@ -17,7 +17,7 @@ export function validateSelectOptions(options) {
 }
 
 function isSelectOptionValid({ value, label }) {
-  return isNumber(value) && isString(label);
+  return isNumber(value) && isNotEmptyString(label);
 }
 
 export function validateTimeLineItems(timelineItems) {
@@ -30,6 +30,22 @@ export function isUndefinedOrNull(value) {
 
 export function isNumberOrNull(value) {
   return isNumber(value) || isNull(value);
+}
+
+export function validateActivities(activities) {
+  return activities.every(isActivityValid);
+}
+
+export function isActivityValid(activity) {
+  return isNotEmptyString(activity);
+}
+
+function isNotEmptyString(value) {
+  return isString(value) && value.length > 0;
+}
+
+export function isButtonTypeValid(type) {
+  return BUTTON_TYPES.includes(type);
 }
 
 function isBetween(value, start, end) {

@@ -1,9 +1,28 @@
 <template>
   <button
-    class="rounded bg-gray-100 p-3 enabled:hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
+    :class="`${typeClasses[type]} rounded disabled:cursor-not-allowed disabled:opacity-50`"
   >
     <slot></slot>
   </button>
 </template>
 
-<script setup></script>
+<script setup>
+import { isButtonTypeValid } from "../validators";
+
+const props = defineProps({
+  type: {
+    default: BUTTON_TYPE_NEUTRAL,
+    type: String,
+    validator: isButtonTypeValid,
+  },
+});
+</script>
+
+<script>
+import { BUTTON_TYPE_DANGER, BUTTON_TYPE_NEUTRAL } from "../constants";
+
+const typeClasses = {
+  [BUTTON_TYPE_NEUTRAL]: " bg-gray-100 p-3 enabled:hover:bg-gray-200",
+  [BUTTON_TYPE_DANGER]: " bg-red-500 p-3 enabled:hover:bg-red-600 text-white",
+};
+</script>

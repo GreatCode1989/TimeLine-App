@@ -44,7 +44,8 @@ const props = defineProps({
   },
   selected: {
     type: Number,
-    required: true,
+    required: false,
+    validator: isNumberOrNull,
   },
 });
 
