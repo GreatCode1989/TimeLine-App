@@ -10,6 +10,8 @@
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
       :activities="activities"
+      @delete-activity="deleteActivity"
+      @create-activity="createActivity"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
@@ -44,9 +46,17 @@ function goTo(page) {
   currentPage.value = page;
 }
 
-const activities = ["Coding", "Reading", "Training"];
+function createActivity(activity) {
+  activities.value.push(activity);
+}
 
-const activitySelectOptions = generateActivitySelectOptions(activities);
+function deleteActivity(activity) {
+  activities.value.splice(activities.value.indexOf(activity), 1);
+}
+
+const activities = ref(["Coding", "Reading", "Training"]);
+
+const activitySelectOptions = generateActivitySelectOptions(activities.value);
 </script>
 
 <style scoped></style>

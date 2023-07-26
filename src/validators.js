@@ -48,16 +48,16 @@ export function isButtonTypeValid(type) {
   return BUTTON_TYPES.includes(type);
 }
 
+export function isUndefined(value) {
+  return value === undefined;
+}
+
 function isBetween(value, start, end) {
   return value >= start && value <= end;
 }
 
 function isNull(value) {
   return value === null;
-}
-
-function isUndefined(value) {
-  return value === undefined;
 }
 
 function isNumber(value) {
